@@ -1,0 +1,23 @@
+name: 'Start S.A.L.'
+
+inputs:
+  secret:
+    description: 'Secret, shhh...'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: 'Start'
+      shell: bash
+      env:
+        SAL_SECRET: ${{ inputs.secret }}
+        REF: ${{ github.ref }}
+        HEAD_REF: ${{ github.head_ref }}
+        PR_URL: ${{ github.event.pull_request._links.html.href }}
+        GH_USER: ${{ github.repository_owner }}
+        GH_REPO: ${{ github.event.repository.name }}
+        GH_SHA: ${{ github.event.after }}
+      run: ${{ github.action_path }}/run.sh
+
+

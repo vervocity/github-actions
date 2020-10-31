@@ -1,0 +1,15 @@
+name: 'Setup Laravel'
+
+inputs:
+  php:
+    description: 'PHP binary'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Prepare application
+      shell: bash
+      run: |
+        cp .env.example .env
+        ${{ inputs.php }} artisan key:generate
