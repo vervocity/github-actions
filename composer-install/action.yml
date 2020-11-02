@@ -1,0 +1,16 @@
+name: 'Composer install'
+
+inputs:
+  php:
+    description: 'PHP binary'
+    required: true
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        ${{ inputs.php }} /usr/local/bin/composer install \
+          --no-interaction \
+          --prefer-dist \
+          --optimize-autoloader \
+          --no-progress
