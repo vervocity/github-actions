@@ -1,0 +1,38 @@
+name: 'Reset database'
+
+inputs:
+  id:
+    description: 'Runner id'
+    required: true
+  password:
+    description: 'Database password'
+    required: true
+  name:
+    description: 'Base database name'
+    required: true
+    default: 'test'
+  username:
+    description: 'Database username'
+    required: true
+    default: 'forge'
+
+outputs:
+  name:
+    description: "Database name for this runner"
+    value: ${{ steps.database.outputs.name }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup database
+      id: database
+      shell: bash
+      run: |
+        DB_DATABASE="${{ inputs.name }}_${{ inputs.id }}"
+
+        echo "DROP DATABASE IF EXISTS ${DB_DATABASE};" > database/reset.sql
+        echo "CREATE DATABASE ${DB_DATABASE};" >> database/reset.sql
+        mysql --user=${{ inputs.username }} --password="${{ inputs.password }}" < database/reset.sql
+
+        echo "Database: ${DB_DATABASE}"
+        echo "::set-output name=NAME::${DB_DATABASE}"

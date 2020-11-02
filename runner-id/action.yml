@@ -1,0 +1,19 @@
+name: 'Runner ID'
+
+outputs:
+  id:
+    description: "The runner id for this action"
+    value: ${{ steps.runner.outputs.id }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get runner id
+      id: runner
+      shell: bash
+      env:
+        WORKSPACE: ${{ runner.workspace }}
+      run: |
+        RUNNER_ID=$(echo "$WORKSPACE" | sed -r 's/[^0-9]\/*//g')
+        echo "Runner ID: ${RUNNER_ID}"
+        echo "::set-output name=ID::${RUNNER_ID}"

@@ -1,0 +1,49 @@
+name: 'Upload results to S.A.L.'
+
+inputs:
+  secret:
+    description: 'Secret, shhh...'
+    required: true
+  php-tests:
+    description: 'PHPUnit test results'
+    default: false
+  php-coverage:
+    description: 'PHP test coverage results'
+    default: false
+  php-cs:
+    description: 'PHP check style results'
+    default: false
+  php-cpd:
+    description: 'PHP copy & paste detection'
+    default: false
+  php-loc:
+    description: 'PHP lines of code results'
+    default: false
+  php-md:
+    description: 'PHP mess detector results'
+    default: false
+  js-cs:
+    description: 'JavaScript check style results'
+    default: false
+
+
+runs:
+  using: "composite"
+  steps:
+    - name: 'Send results'
+      shell: bash
+      env:
+        SAL_SECRET: ${{ inputs.secret }}
+
+        GH_USER: ${{ github.repository_owner }}
+        GH_REPO: ${{ github.event.repository.name }}
+        GH_SHA: ${{ github.event.after }}
+
+        PHP_TESTS: ${{ inputs.php-tests }}
+        PHP_COVERAGE: ${{ inputs.php-coverage }}
+        PHP_CS: ${{ inputs.php-cs }}
+        PHP_CPD: ${{ inputs.php-cpd }}
+        PHP_LOC: ${{ inputs.php-loc }}
+        PHP_MD: ${{ inputs.php-md }}
+        JS_CS: ${{ inputs.js-cs }}
+      run: ${{ github.action_path }}/send.sh
