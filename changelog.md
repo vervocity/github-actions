@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.0.2
+- 🐛 Fixed issue missing SHA on pull_request trigger.
+
 ## v1.0.1 - 2020-11-13
 - 🐛 Fixed issue with invalid permissions run file.
 
