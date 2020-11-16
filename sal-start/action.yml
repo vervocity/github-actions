@@ -18,7 +18,7 @@ runs:
         GH_USER: ${{ github.repository_owner }}
         GH_REPO: ${{ github.event.repository.name }}
         GH_SHA: ${{ github.event.pull_request.head.sha }}
-      run: ${{ github.action_path }}/run.sh
+      run: ${{ github.action_path }}/start.sh
 
 
 

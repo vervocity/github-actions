@@ -1,3 +1,4 @@
+
 if [ -z "$HEAD_REF" ]; then
   BRANCH=${REF#refs/heads/}
 else
