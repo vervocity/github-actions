@@ -11,7 +11,6 @@ runs:
     - name: 'Start'
       shell: bash
       env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
         SAL_SECRET: ${{ inputs.secret }}
         REF: ${{ github.ref }}
         HEAD_REF: ${{ github.head_ref }}
@@ -19,22 +18,7 @@ runs:
         GH_USER: ${{ github.repository_owner }}
         GH_REPO: ${{ github.event.repository.name }}
         GH_SHA: ${{ github.event.pull_request.head.sha }}
-      run: |
-        if [ -z "$HEAD_REF" ]; then
-          BRANCH=${REF#refs/heads/}
-        else
-          BRANCH=$HEAD_REF
-        fi
-
-        echo "User:         ${GH_USER}"
-        echo "Repository:   ${GH_REPO}"
-        echo "SHA1:         ${GH_SHA}"
-        echo "PR:           ${PR_URL}"
-        echo "Branch:       ${BRANCH}"
-
-        echo "$GITHUB_CONTEXT"
-
-        vi-tools sal:build --user=${GH_USER} --repo=${GH_REPO} --sha1=${GH_SHA} --pr_urls=${PR_URL} --branch=${BRANCH}
+      run: ${{ github.action_path }}/run.sh
 
 
 

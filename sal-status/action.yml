@@ -11,8 +11,9 @@ runs:
     - shell: bash
       env:
         SAL_SECRET: ${{ inputs.secret }}
+        GH_SHA: ${{ github.event.pull_request.head.sha }}
       run: |
         vi-tools sal:status \
           --user=${{ github.repository_owner }} \
           --repo=${{ github.event.repository.name }} \
-          --sha1=${{ github.event.after }}
+          --sha1=${GH_SHA}
