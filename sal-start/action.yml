@@ -11,6 +11,7 @@ runs:
     - name: 'Start'
       shell: bash
       env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
         SAL_SECRET: ${{ inputs.secret }}
         REF: ${{ github.ref }}
         HEAD_REF: ${{ github.head_ref }}
@@ -30,6 +31,8 @@ runs:
         echo "SHA1:         ${GH_SHA}"
         echo "PR:           ${PR_URL}"
         echo "Branch:       ${BRANCH}"
+
+        echo "$GITHUB_CONTEXT"
 
         vi-tools sal:build --user=${GH_USER} --repo=${GH_REPO} --sha1=${GH_SHA} --pr_urls=${PR_URL} --branch=${BRANCH}
 
