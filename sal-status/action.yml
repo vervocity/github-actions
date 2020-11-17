@@ -11,8 +11,14 @@ runs:
     - shell: bash
       env:
         SAL_SECRET: ${{ inputs.secret }}
-        GH_SHA: ${{ github.event.pull_request.head.sha }}
+        PR_SHA: ${{ github.event.pull_request.head.sha }}
       run: |
+        if [ -z "$PR_SHA" ]; then
+          GH_SHA=$GITHUB_SHA
+        else
+          GH_SHA=$PR_SHA
+        fi
+
         vi-tools sal:status \
           --user=${{ github.repository_owner }} \
           --repo=${{ github.event.repository.name }} \
