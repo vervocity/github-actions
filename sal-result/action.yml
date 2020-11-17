@@ -37,7 +37,7 @@ runs:
 
         GH_USER: ${{ github.repository_owner }}
         GH_REPO: ${{ github.event.repository.name }}
-        GH_SHA: ${{ github.event.pull_request.head.sha }}
+        PR_SHA: ${{ github.event.pull_request.head.sha }}
 
         PHP_TESTS: ${{ inputs.php-tests }}
         PHP_COVERAGE: ${{ inputs.php-coverage }}

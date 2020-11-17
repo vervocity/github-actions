@@ -1,4 +1,10 @@
 
+if [ -z "$PR_SHA" ]; then
+  GH_SHA=$GITHUB_SHA
+else
+  GH_SHA=$PR_SHA
+fi
+
 if [ -f "$PHP_TESTS" ]; then
   vi-tools sal:result --user="$GH_USER" --repo="$GH_REPO" --sha1="$GH_SHA" \
     --type=tests \
