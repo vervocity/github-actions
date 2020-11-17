@@ -18,12 +18,18 @@ runs:
         PR_URL: ${{ github.event.pull_request._links.html.href }}
         GH_USER: ${{ github.repository_owner }}
         GH_REPO: ${{ github.event.repository.name }}
-        GH_SHA: ${{ github.event.pull_request.head.sha }}
+        PR_SHA: ${{ github.event.pull_request.head.sha }}
       run: |
         if [ -z "$HEAD_REF" ]; then
           BRANCH=${REF#refs/heads/}
         else
           BRANCH=$HEAD_REF
+        fi
+
+        if [ -z "$PR_SHA" ]; then
+          GH_SHA=$GITHUB_SHA
+        else
+          GH_SHA=$PR_SHA
         fi
 
         echo "User:         ${GH_USER}"
