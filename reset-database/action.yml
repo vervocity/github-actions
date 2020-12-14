@@ -30,9 +30,9 @@ runs:
       run: |
         DB_DATABASE="${{ inputs.name }}_${{ inputs.id }}"
 
-        echo "DROP DATABASE IF EXISTS ${DB_DATABASE};" > database/reset.sql
-        echo "CREATE DATABASE ${DB_DATABASE};" >> database/reset.sql
-        mysql --user=${{ inputs.username }} --password="${{ inputs.password }}" < database/reset.sql
+        DROP_DB="DROP DATABASE IF EXISTS ${DB_DATABASE};"
+        CREATE_DB="CREATE DATABASE ${DB_DATABASE};"
+        mysql --user=${{ inputs.username }} --password="${{ inputs.password }}" --execute="${DROP_DB} ${CREATE_DB}"
 
         echo "Database: ${DB_DATABASE}"
         echo "::set-output name=NAME::${DB_DATABASE}"
