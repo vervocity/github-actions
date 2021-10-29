@@ -23,6 +23,12 @@ if [ -f "$PHP_CS" ]; then
     --file="$PHP_CS"
 fi
 
+if [ -f "$PHP_STAN" ]; then
+  vi-tools sal:result --user="$GH_USER" --repo="$GH_REPO" --sha1="$GH_SHA" \
+    --type=php-stan \
+    --file="$PHP_STAN"
+fi
+
 if [ -f "$PHP_CPD" ]; then
   vi-tools sal:result --user="$GH_USER" --repo="$GH_REPO" --sha1="$GH_SHA" \
     --type=cpd \

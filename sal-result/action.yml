@@ -13,6 +13,9 @@ inputs:
   php-cs:
     description: 'PHP check style results'
     default: false
+  php-stan:
+    description: 'PHPStan results'
+    default: false
   php-cpd:
     description: 'PHP copy & paste detection'
     default: false
@@ -42,6 +45,7 @@ runs:
         PHP_TESTS: ${{ inputs.php-tests }}
         PHP_COVERAGE: ${{ inputs.php-coverage }}
         PHP_CS: ${{ inputs.php-cs }}
+        PHP_STAN: ${{ inputs.php-stan }}
         PHP_CPD: ${{ inputs.php-cpd }}
         PHP_LOC: ${{ inputs.php-loc }}
         PHP_MD: ${{ inputs.php-md }}
