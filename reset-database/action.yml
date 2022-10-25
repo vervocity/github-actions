@@ -35,4 +35,4 @@ runs:
         mysql --user=${{ inputs.username }} --password="${{ inputs.password }}" --execute="${DROP_DB} ${CREATE_DB}"
 
         echo "Database: ${DB_DATABASE}"
-        echo "::set-output name=NAME::${DB_DATABASE}"
+        echo "NAME=${DB_DATABASE}" >> $GITHUB_OUTPUT

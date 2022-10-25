@@ -16,4 +16,4 @@ runs:
       run: |
         RUNNER_ID=$(echo "$WORKSPACE" | sed -r 's/[^0-9]\/*//g')
         echo "Runner ID: ${RUNNER_ID}"
-        echo "::set-output name=ID::${RUNNER_ID}"
+        echo "ID=${RUNNER_ID}" >> $GITHUB_OUTPUT
