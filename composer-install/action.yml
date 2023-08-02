@@ -4,12 +4,15 @@ inputs:
   php:
     description: 'PHP binary'
     required: true
+  composer:
+    description: 'Composer executable name'
+    default: 'composer'
 runs:
   using: composite
   steps:
     - shell: bash
       run: |
-        ${{ inputs.php }} /usr/local/bin/composer install \
+        ${{ inputs.php }} $(which ${{ inputs.composer }} install \
           --no-interaction \
           --prefer-dist \
           --optimize-autoloader \
