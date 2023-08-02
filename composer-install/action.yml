@@ -12,7 +12,7 @@ runs:
   steps:
     - shell: bash
       run: |
-        ${{ inputs.php }} $(which ${{ inputs.composer }} install \
+        ${{ inputs.php }} $(which ${{ inputs.composer }}) install \
           --no-interaction \
           --prefer-dist \
           --optimize-autoloader \
